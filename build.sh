@@ -13,7 +13,7 @@ if [ -d "clang" ];
 then
 echo Clang directory already exists
 else
-wget --quiet https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/bd168d26ab9229a8185e385030d91314ac447ed4/clang-r383902.tar.gz -O "aosp-clang.tar.gz"
+wget --quiet https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/529a8adc22e54aecc2278960d1a6d84967fb7318/clang-r433403b.tar.gz -O "aosp-clang.tar.gz"
 mkdir clang && tar -xf aosp-clang.tar.gz -C clang && rm -f aosp-clang.tar.gz
 fi
 git clone --depth=1 https://github.com/shub876/aarch64-linux-android-4.9.git arm64
