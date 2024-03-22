@@ -200,6 +200,7 @@ static irqreturn_t mt6370_pmu_irq_handler(int irq, void *priv)
 	0};
 	u8 valid_chg[16] = { 0 };
 	int i = 0, j = 0, ret = 0;
+    (void)irq_ind; // Keep irq_ind without affecting the program
 
 	pr_info_ratelimited("%s\n", __func__);
 	pm_runtime_get_sync(chip->dev);
