@@ -511,6 +511,7 @@ static int aw87xxx_profile_switch_get(struct snd_kcontrol *kcontrol,
 {
 	int index = 0;
 	char *profile;
+    (void)profile; // Suppress "variable set but not used" warning
 	struct aw87xxx *aw87xxx = (struct aw87xxx *)kcontrol->private_value;
 
 	if (aw87xxx == NULL) {
