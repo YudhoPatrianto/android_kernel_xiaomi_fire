@@ -743,6 +743,7 @@ static void accdet_get_efuse(void)
 	int tmp_div;
 	unsigned int moisture_eint0;
 	unsigned int moisture_eint1;
+    (void)ret; // Suppress "variable set but not used" warning
 
 	/* accdet offset efuse:
 	 * this efuse must divided by 2
@@ -823,7 +824,7 @@ static void accdet_get_efuse_4key(void)
 	unsigned short tmp_val = 0;
 	unsigned short tmp_8bit = 0;
 	int ret = 0;
-
+    (void)ret; // Suppress "variable set but not used" warning
 	/* 4-key efuse:
 	 * bit[9:2] efuse value is loaded, so every read out value need to be
 	 * left shift 2 bit,and then compare with voltage get from AUXADC.
@@ -2089,6 +2090,7 @@ static u32 config_moisture_detect_1_1(void)
 static u32 config_moisture_detect_2_1(void)
 {
 	u32 efuseval = 0, eintvth = 0, ret = 0;
+    (void)ret; // Suppress "variable set but not used" warning
 	/* select VTH to 2.8v(default), can set to 2.4 or 2.0v by dts */
 	accdet_update_bits(RG_EINTCOMPVTH_ADDR,
 		RG_EINTCOMPVTH_SFT, RG_EINTCOMPVTH_MASK,
@@ -2140,6 +2142,8 @@ void accdet_irq_handle(void)
 {
 	u32 eintID = 0, ret = 0;
 	u32 irq_status = 0, acc_sts = 0, eint_sts = 0;
+    (void)acc_sts; // Suppress "variable set but not used" warning
+    (void)eint_sts; // Suppress "variable set but not used" warning
 
 	eintID = get_triggered_eint();
 	irq_status = accdet_read(ACCDET_IRQ_ADDR);
@@ -2183,6 +2187,7 @@ static irqreturn_t mtk_accdet_irq_handler_thread(int irq, void *data)
 static irqreturn_t ex_eint_handler(int irq, void *data)
 {
 	int ret = 0;
+    (void)ret; // Suppress "variable set but not used" warning
 
 	if (accdet->cur_eint_state == EINT_PLUG_IN) {
 		/* To trigger EINT when the headset was plugged in
@@ -2978,10 +2983,13 @@ static void delay_init_timerhandler(struct timer_list *t)
 static int accdet_probe(struct platform_device *pdev)
 {
 	int ret = 0;
-	struct resource *res;
-	struct mt6397_chip *mt6397_chip = dev_get_drvdata(pdev->dev.parent);
+    struct mt6397_chip *mt6397_chip;
 	const struct of_device_id *of_id =
 				of_match_device(accdet_of_match, &pdev->dev);
+	struct resource *res;
+    (void)res; // Suppress "variable set but not used" warning
+    mt6397_chip = dev_get_drvdata(pdev->dev.parent);
+
 	if (!of_id) {
 		dev_dbg(&pdev->dev, "Error: No device match found\n");
 		return -ENODEV;
