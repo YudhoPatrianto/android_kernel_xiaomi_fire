@@ -231,6 +231,7 @@ static inline int32_t spi_read_write(struct spi_device *client, uint8_t *buf, si
 	struct spi_transfer t = {
 		.len    = len,
 	};
+    (void)ret; // Suppress "variable set but not used" warning
 
 	spi->controller_data = (void*)&fts_mt_chip_conf;
 	ret = spi_setup(spi);
@@ -1688,6 +1689,7 @@ static irqreturn_t nvt_ts_work_func(int irq, void *data)
 	uint32_t pen_btn1 = 0;
 	uint32_t pen_btn2 = 0;
 	uint32_t pen_battery = 0;
+    (void)pen_battery; // Suppress "variable set but not used" warning
 
 #if WAKEUP_GESTURE
 	if (bTouchIsAwake == 0) {
@@ -2181,6 +2183,7 @@ static int nvt_detect_charger_notifier_callback(struct notifier_block *self,
                                 unsigned long event, void *data)
 {
 	int ret;
+    (void)ret; // Suppress "variable set but not used" warning
 
 	NVT_LOG("nvt_detect_charger_notifier_callback start\n");
 	nvt_charger_flag = event;
