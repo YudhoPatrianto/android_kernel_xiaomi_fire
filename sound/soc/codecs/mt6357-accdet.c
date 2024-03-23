@@ -617,6 +617,7 @@ static void accdet_get_efuse(void)
 {
 	unsigned short efuseval = 0;
 	int ret = 0;
+    (void)ret; // Suppress "variable set but not used" warning
 	int tmp_div;
 	unsigned int moisture_eint0;
 	unsigned int moisture_eint1;
@@ -700,6 +701,7 @@ static void accdet_get_efuse_4key(void)
 	unsigned short tmp_val = 0;
 	unsigned short tmp_8bit = 0;
 	int ret = 0;
+    (void)ret; // Suppress "variable set but not used" warning
 
 	/* 4-key efuse:
 	 * bit[9:2] efuse value is loaded, so every read out value need to be
@@ -1494,6 +1496,8 @@ void accdet_irq_handle(void)
 {
 	u32 eintID = 0;
 	u32 irq_status = 0, acc_sts = 0, eint_sts = 0;
+    (void)acc_sts; // Suppress "variable set but not used" warning
+    (void)eint_sts; // Suppress "variable set but not used" warning
 	unsigned int moisture_vol = 0;
 
 	eintID = get_triggered_eint();
@@ -1564,7 +1568,7 @@ static irqreturn_t mtk_accdet_irq_handler_thread(int irq, void *data)
 static irqreturn_t ex_eint_handler(int irq, void *data)
 {
 	int ret = 0;
-
+    (void)ret; // Suppress "variable set but not used" warning
 	if (accdet->cur_eint_state == EINT_PLUG_IN) {
 		/* To trigger EINT when the headset was plugged in
 		 * We set the polarity back as we initialed.
@@ -1973,6 +1977,7 @@ static int accdet_probe(struct platform_device *pdev)
 {
 	int ret = 0;
 	struct resource *res;
+    (void)res; // Suppress "variable set but not used" warning
 	struct mt6397_chip *mt6397_chip = dev_get_drvdata(pdev->dev.parent);
 	const struct of_device_id *of_id =
 				of_match_device(accdet_of_match, &pdev->dev);
