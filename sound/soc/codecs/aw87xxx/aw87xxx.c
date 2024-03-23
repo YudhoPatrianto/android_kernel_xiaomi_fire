@@ -509,10 +509,11 @@ static int aw87xxx_profile_switch_put(struct snd_kcontrol *kcontrol,
 static int aw87xxx_profile_switch_get(struct snd_kcontrol *kcontrol,
 			struct snd_ctl_elem_value *ucontrol)
 {
+    struct aw87xxx *aw87xxx; // Move the declaration to the beginning
 	int index = 0;
 	char *profile;
     (void)profile; // Suppress "variable set but not used" warning
-	struct aw87xxx *aw87xxx = (struct aw87xxx *)kcontrol->private_value;
+    aw87xxx = (struct aw87xxx *)kcontrol->private_value;
 
 	if (aw87xxx == NULL) {
 		AW_LOGE("get struct aw87xxx failed");
