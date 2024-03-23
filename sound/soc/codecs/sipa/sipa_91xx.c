@@ -80,7 +80,7 @@ void sia91xx_register_interrupt(sipa_dev_t *si_pa)
 {
 	int irq_flags;
 	int ret;
-
+    (void)ret; // Suppress "variable set but not used" warning
 	if (gpio_is_valid(si_pa->irq_pin)) {
 		irq_flags = IRQF_TRIGGER_RISING;
 
