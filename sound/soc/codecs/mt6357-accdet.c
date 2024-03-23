@@ -1975,13 +1975,14 @@ static void delay_init_timerhandler(struct timer_list *t)
 
 static int accdet_probe(struct platform_device *pdev)
 {
+    int ret = 0;
     struct mt6397_chip *mt6397_chip; // Move the declaration to the beginning
-	mt6397_chip = dev_get_drvdata(pdev->dev.parent);
-	int ret = 0;
 	const struct of_device_id *of_id =
 				of_match_device(accdet_of_match, &pdev->dev);
 	struct resource *res;
     (void)res; // Suppress "variable set but not used" warning
+	mt6397_chip = dev_get_drvdata(pdev->dev.parent);
+
 	if (!of_id) {
 		dev_dbg(&pdev->dev, "Error: No device match found\n");
 		return -ENODEV;
