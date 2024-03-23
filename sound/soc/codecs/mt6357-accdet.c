@@ -615,12 +615,12 @@ static u32 accdet_get_auxadc(void)
 
 static void accdet_get_efuse(void)
 {
+    int tmp_div;
+	unsigned int moisture_eint0;
+	unsigned int moisture_eint1;
 	unsigned short efuseval = 0;
 	int ret = 0;
     (void)ret; // Suppress "variable set but not used" warning
-	int tmp_div;
-	unsigned int moisture_eint0;
-	unsigned int moisture_eint1;
 
 	/* accdet offset efuse:
 	 * this efuse must divided by 2
@@ -1494,11 +1494,11 @@ static u32 moisture_detect(void)
 }
 void accdet_irq_handle(void)
 {
+	unsigned int moisture_vol = 0;
 	u32 eintID = 0;
 	u32 irq_status = 0, acc_sts = 0, eint_sts = 0;
     (void)acc_sts; // Suppress "variable set but not used" warning
     (void)eint_sts; // Suppress "variable set but not used" warning
-	unsigned int moisture_vol = 0;
 
 	eintID = get_triggered_eint();
 	irq_status = accdet_read(ACCDET_IRQ_ADDR);
@@ -1975,12 +1975,13 @@ static void delay_init_timerhandler(struct timer_list *t)
 
 static int accdet_probe(struct platform_device *pdev)
 {
+    struct mt6397_chip *mt6397_chip; // Move the declaration to the beginning
+	mt6397_chip = dev_get_drvdata(pdev->dev.parent);
 	int ret = 0;
-	struct resource *res;
-    (void)res; // Suppress "variable set but not used" warning
-	struct mt6397_chip *mt6397_chip = dev_get_drvdata(pdev->dev.parent);
 	const struct of_device_id *of_id =
 				of_match_device(accdet_of_match, &pdev->dev);
+	struct resource *res;
+    (void)res; // Suppress "variable set but not used" warning
 	if (!of_id) {
 		dev_dbg(&pdev->dev, "Error: No device match found\n");
 		return -ENODEV;
