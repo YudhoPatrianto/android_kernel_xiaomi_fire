@@ -9,7 +9,7 @@ export endpoint="https://api.telegram.org/bot${token}"
 read -p "Input Your Path Of Clang Example: (/home/user/clang/bin): " clang_dir
 codename=$1
 defconfig=$(find arch/arm64/configs -name "*${codename}_defconfig*" | sed 's|arch/arm64/configs/||')
-kernel_url=$(git remote -v | head -n 1 | sed 's/ (fetch)//' | sed 's/^origin[[:space:]]\+//;s/[[:space:]]\+(fetch)//')
+kernel_url=$(git remote -v | head -n 1 | sed 's/ (fetch)//; s/^origin[[:space:]]\+//; s/https:\/\/.*@/https:\/\//; s/:[^/]*//')
 kernel_branch=$(git branch | sed 's/* //' | head -n 1)
 workdir=$(pwd)
 
