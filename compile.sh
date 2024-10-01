@@ -12,6 +12,7 @@ defconfig=$(find arch/arm64/configs -name "*${codename}_defconfig*" | sed 's|arc
 kernel_url=$(git remote -v | head -n 1 | sed 's/ (fetch)//; s/^origin[[:space:]]\+//; s/https:\/\/.*@/https:\/\//; s/:[^/]*//')
 kernel_branch=$(git branch | sed 's/* //' | head -n 1)
 workdir=$(pwd)
+clang_version=$(${clang_dir}/clang --version | head -n 1 | sed 's|git (https://github.com/llvm/llvm-project f2f9cdd22171f0c54cad7c6b183857f3d856c344)||')
 
 # Notify Build
 function alert_build() {
@@ -21,7 +22,9 @@ function alert_build() {
 <b>Kernel URL Branch:</b> <code>${kernel_branch}</code>%0A\
 <b>Defconfig:</b> <code>${defconfig}</code>%0A\
 <b>Codename:</b> <code>${codename}</code>%0A\
-<b>Workdir:</b> <code>${workdir}</code>%0A%0A<b>Build Started!!</b>" \
+<b>Workdir:</b> <code>${workdir}</code>%0A\
+<b>Clang Version:</b> <code>${clang_version}</code>%0A\
+%0A%0A<b>Build Started!!</b>" \
     -d parse_mode='HTML' \
     > /dev/null 2>&1
 }
