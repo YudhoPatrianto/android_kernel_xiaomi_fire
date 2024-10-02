@@ -180,7 +180,7 @@ int xiaomitouch_register_modedata(struct xiaomi_touch_interface *data)
 
 int update_palm_sensor_value(int value)
 {
-	struct xiaomi_touch *dev = NULL;
+
 
 	mutex_lock(&xiaomi_touch_dev.palm_mutex);
 

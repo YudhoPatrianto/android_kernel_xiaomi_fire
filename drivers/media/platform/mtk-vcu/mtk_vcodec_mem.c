@@ -82,7 +82,6 @@ void *mtk_vcu_set_buffer(struct mtk_vcu_queue *vcu_queue,
 	unsigned int buffer;
 	dma_addr_t *dma_addr = NULL;
 	struct dma_buf *dbuf = NULL;
-	int op;
 
 	pr_debug("[%s] %d iova = %llx src_vb = %p dst_vb = %p\n",
 		__func__, vcu_queue->num_buffers, mem_buff_data->iova,
@@ -115,7 +114,7 @@ void *mtk_vcu_set_buffer(struct mtk_vcu_queue *vcu_queue,
 				dbuf = src_vb->planes[plane].dbuf;
 				vcu_buffer->size = src_vb->planes[plane].length;
 				vcu_buffer->mem_priv = src_vb->planes[plane].mem_priv;
-				op = DMA_TO_DEVICE;
+				DMA_TO_DEVICE;
 				pr_debug("src size = %d mem_buff_data len = %d\n",
 					(unsigned int)vcu_buffer->size,
 					(unsigned int)mem_buff_data->len);
@@ -129,7 +128,7 @@ void *mtk_vcu_set_buffer(struct mtk_vcu_queue *vcu_queue,
 				dbuf = dst_vb->planes[plane].dbuf;
 				vcu_buffer->size = dst_vb->planes[plane].length;
 				vcu_buffer->mem_priv = dst_vb->planes[plane].mem_priv;
-				op = DMA_FROM_DEVICE;
+				DMA_FROM_DEVICE;
 				pr_debug("dst size = %d mem_buff_data len = %d\n",
 					(unsigned int)vcu_buffer->size,
 					(unsigned int)mem_buff_data->len);

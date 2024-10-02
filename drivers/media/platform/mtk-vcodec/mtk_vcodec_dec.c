@@ -977,7 +977,6 @@ void mtk_vcodec_dec_empty_queues(struct file *file, struct mtk_vcodec_ctx *ctx)
 				VB2_BUF_STATE_ERROR);
 
 	while ((dst_buf = v4l2_m2m_dst_buf_remove(ctx->m2m_ctx))) {
-		struct vb2_v4l2_buffer *vb2_v4l2 = NULL;
 
 		for (i = 0; i < dst_buf->num_planes; i++)
 			vb2_set_plane_payload(dst_buf, i, 0);

@@ -79,16 +79,15 @@ static irqreturn_t sia91xx_irq(
 void sia91xx_register_interrupt(sipa_dev_t *si_pa)
 {
 	int irq_flags;
-	int ret;
 
 	if (gpio_is_valid(si_pa->irq_pin)) {
 		irq_flags = IRQF_TRIGGER_RISING;
 
 		if (si_pa->channel_num == SIPA_CHANNEL_0) {
-			ret = request_irq(gpio_to_irq(si_pa->irq_pin), sia91xx_irq,
+			request_irq(gpio_to_irq(si_pa->irq_pin), sia91xx_irq,
 				irq_flags, "sia91xx_L", si_pa);
 		} else {
-			ret = request_irq(gpio_to_irq(si_pa->irq_pin), sia91xx_irq,
+			request_irq(gpio_to_irq(si_pa->irq_pin), sia91xx_irq,
 				irq_flags, "sia91xx_R", si_pa);
 		}
 	} else {
