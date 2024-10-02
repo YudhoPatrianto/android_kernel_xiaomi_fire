@@ -2179,11 +2179,10 @@ void nvt_charger_mode_notifier_callback(struct work_struct *work)
 static int nvt_detect_charger_notifier_callback(struct notifier_block *self,
                                 unsigned long event, void *data)
 {
-	int ret;
 
 	NVT_LOG("nvt_detect_charger_notifier_callback start\n");
 	nvt_charger_flag = event;
-	ret = queue_work(nvt_charger_detect_workqueue, &nvt_charger_detect_work);
+	queue_work(nvt_charger_detect_workqueue, &nvt_charger_detect_work);
 	NVT_LOG("nvt_detect_charger_notifier_callback end\n");
 	return 0;
 }
