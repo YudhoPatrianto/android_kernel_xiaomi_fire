@@ -739,7 +739,6 @@ static u32 accdet_get_auxadc(void)
 static void accdet_get_efuse(void)
 {
 	unsigned short efuseval = 0;
-	int ret = 0;
 	int tmp_div;
 	unsigned int moisture_eint0;
 	unsigned int moisture_eint1;
@@ -747,7 +746,7 @@ static void accdet_get_efuse(void)
 	/* accdet offset efuse:
 	 * this efuse must divided by 2
 	 */
-	ret = nvmem_device_read(accdet->accdet_efuse, 102*2, 2, &efuseval);
+	nvmem_device_read(accdet->accdet_efuse, 102*2, 2, &efuseval);
 	accdet->auxadc_offset = efuseval & 0xFF;
 	if (accdet->auxadc_offset > 128)
 		accdet->auxadc_offset -= 256;
@@ -756,7 +755,7 @@ static void accdet_get_efuse(void)
  * we need to transfer it
  */
 	/* moisture vdd efuse offset */
-	ret = nvmem_device_read(accdet->accdet_efuse, 105*2, 2, &efuseval);
+	nvmem_device_read(accdet->accdet_efuse, 105*2, 2, &efuseval);
 	accdet->moisture_vdd_offset =
 		(int)((efuseval >> 8) & ACCDET_CALI_MASK0);
 	if (accdet->moisture_vdd_offset > 128)
@@ -765,7 +764,7 @@ static void accdet_get_efuse(void)
 		__func__, efuseval, accdet->moisture_vdd_offset);
 
 	/* moisture offset */
-	ret = nvmem_device_read(accdet->accdet_efuse, 106*2, 2, &efuseval);
+	nvmem_device_read(accdet->accdet_efuse, 106*2, 2, &efuseval);
 	accdet->moisture_offset = (int)(efuseval & ACCDET_CALI_MASK0);
 	if (accdet->moisture_offset > 128)
 		accdet->moisture_offset -= 256;
@@ -774,14 +773,14 @@ static void accdet_get_efuse(void)
 
 	if (accdet_dts.moisture_use_ext_res == 0x0) {
 		/* moisture eint efuse offset */
-		ret = nvmem_device_read(accdet->accdet_efuse,
+		nvmem_device_read(accdet->accdet_efuse,
 				104*2, 2, &efuseval);
 		moisture_eint0 =
 			(int)((efuseval >> 8) & ACCDET_CALI_MASK0);
 		pr_info("%s moisture_eint0 efuse=0x%x,moisture_eint0=0x%x\n",
 			__func__, efuseval, moisture_eint0);
 
-		ret = nvmem_device_read(accdet->accdet_efuse,
+		nvmem_device_read(accdet->accdet_efuse,
 				105*2, 2, &efuseval);
 		moisture_eint1 = (int)(efuseval & ACCDET_CALI_MASK0);
 		pr_info("%s moisture_eint1 efuse=0x%x,moisture_eint1=0x%x\n",
