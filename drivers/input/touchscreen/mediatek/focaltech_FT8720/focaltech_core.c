@@ -127,10 +127,9 @@ void fts_charger_mode_notifier_callback(struct work_struct *work)
 static int fts_detect_charger_notifier_callback(struct notifier_block *self,
                                 unsigned long event, void *data)
 {
-	int ret;
 	FTS_INFO("nvt_detect_charger_notifier_callback start\n");
 	fts_charger_flag = event;
-	ret = queue_work(fts_charger_detect_workqueue, &fts_charger_detect_work);
+	queue_work(fts_charger_detect_workqueue, &fts_charger_detect_work);
 	FTS_INFO("nvt_detect_charger_notifier_callback end\n");
 	return 0;
 }
