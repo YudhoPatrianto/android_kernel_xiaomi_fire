@@ -226,14 +226,13 @@ static struct mtk_chip_config fts_mt_chip_conf = {
 static inline int32_t spi_read_write(struct spi_device *client, uint8_t *buf, size_t len , NVT_SPI_RW rw)
 {
 	struct spi_message m;
-	int ret = 0;
 	struct spi_device *spi = client;
 	struct spi_transfer t = {
 		.len    = len,
 	};
 
 	spi->controller_data = (void*)&fts_mt_chip_conf;
-	ret = spi_setup(spi);
+	spi_setup(spi);
 
 	memset(ts->xbuf, 0, len + DUMMY_BYTES);
 	memcpy(ts->xbuf, buf, len);
