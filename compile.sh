@@ -47,7 +47,8 @@ function build_kernel() {
         make -j$(nproc --all) O=out ARCH=arm64 ${defconfig} 2>&1 | tee out/compile_${defconfig}.log 
         make -j$(nproc --all) ARCH=arm64 O=out \
                                 CC=clang \
-                                CROSS_COMPILE_COMPAT=aarch64-linux-gnu- \
+                                CLANG_TRIPLE=aarch64-linux-gnu- \
+                                CROSS_COMPILE=aarch64-linux-gnu- \
                                 CROSS_COMPILE_ARM32=arm-linux-gnueabi- 2>&1 | tee out/compile_${defconfig}.log
 }
 
