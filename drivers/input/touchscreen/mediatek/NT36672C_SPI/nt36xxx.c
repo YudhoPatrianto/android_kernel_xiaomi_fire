@@ -1686,7 +1686,6 @@ static irqreturn_t nvt_ts_work_func(int irq, void *data)
 	int8_t pen_tilt_y = 0;
 	uint32_t pen_btn1 = 0;
 	uint32_t pen_btn2 = 0;
-	uint32_t pen_battery = 0;
 
 #if WAKEUP_GESTURE
 	if (bTouchIsAwake == 0) {
